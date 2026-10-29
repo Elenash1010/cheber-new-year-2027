@@ -109,7 +109,7 @@ header {
 .header .btn {
   appearance: none;
   border: 1px solid var(--gold);
-  border-radius: 999px;
+  border-radius: var(--button-radius);
   background: transparent;
   color: #fff;
   padding: 12px 23px;
@@ -471,7 +471,7 @@ header {
 
 .btn {
   min-height: 54px;
-  border-radius: 14px;
+  border-radius: var(--button-radius);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -625,7 +625,7 @@ header {
   height: 64px;
   margin-top: 28px;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--button-radius);
   background: linear-gradient(90deg,#ffd47f,#e8ab48 58%,#f0bd62);
   color: #102A56;
   font-weight: 800;
@@ -854,16 +854,15 @@ header {
   .benefit,.benefit:last-child {
     grid-column: auto;
     min-height: 0;
-    display: grid;
-    grid-template-columns: 50px 1fr;
-    text-align: left;
-    column-gap: 15px;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: stretch;
     padding: 20px;
   }
 
   .benefit__icon {
-    grid-row: 1/3;
+    align-self: center;
     margin: 0;
     height: 44px;
   }
@@ -930,7 +929,8 @@ body {
 }
 
 :root {
-  --control-radius: 999px;
+  --button-radius: 999px;
+  --control-radius: var(--button-radius);
 }
 
 .header .btn,
@@ -941,7 +941,7 @@ body {
 .inquiry .segment,
 .inquiry .segment span,
 .inquiry .submit {
-  border-radius: var(--control-radius);
+  border-radius: var(--button-radius);
 }
 
 .header {
@@ -1390,9 +1390,7 @@ main::before {
 
 @media (max-width: 520px) {
   .offers .benefit {
-    grid-template-columns: 62px minmax(0, 1fr);
     padding: 20px 14px;
-    column-gap: 12px;
   }
 
   .offers > .container,
@@ -1441,7 +1439,7 @@ main::before {
   min-height: 48px;
   padding: 12px 18px;
   border: 1px solid #EAB45C;
-  border-radius: 999px;
+  border-radius: var(--button-radius);
   background: #00133A;
   color: #fff;
   box-shadow: none;
@@ -2266,7 +2264,7 @@ main > .section > .container {
   margin: 0 auto 12px;
   padding: 12px 24px;
   border: 1px solid #f9dca0;
-  border-radius: 999px;
+  border-radius: var(--button-radius);
   background: linear-gradient(135deg, #ffe2a0, #eab45c 65%, #dca34b);
   box-shadow: 0 5px 16px rgba(149, 95, 17, .15), inset 0 1px 0 rgba(255,255,255,.6);
   color: #061b46;
@@ -2284,7 +2282,7 @@ main > .section > .container {
   box-shadow: 0 5px 16px rgba(6, 27, 70, .22);
 }
 #formats .price-button:focus-visible { outline: 3px solid var(--navy-2); outline-offset: 4px; }
-:is(#formats, .price-dialog) .format-price {
+:where(#formats, .price-dialog) .format-price {
   position: relative;
   margin: 0 24px 28px;
   padding: 22px 20px 18px;
@@ -2295,19 +2293,19 @@ main > .section > .container {
   color: #fff;
   font-variant-numeric: lining-nums tabular-nums;
 }
-:is(#formats, .price-dialog) .format-price__date { margin: 0 0 22px; color: #f0ce91; font-size: 24px; font-weight: 600; letter-spacing: .02em; }
+:where(#formats, .price-dialog) .format-price__date { margin: 0 0 22px; color: #f0ce91; font-size: 24px; font-weight: 600; letter-spacing: .02em; }
 .format-price__rates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; }
 .format-price__rates > div { min-width: 0; padding-inline: 6px; }
 .format-price__rates > div + div { border-left: 1px solid rgba(234,180,92,.3); }
 .format-price__rates dt { font-size: clamp(20px, 2vw, 26px); color: #fff; margin-bottom: 12px; line-height: 1.35; }
 .format-price__rates dd { margin: 0; font-size: clamp(25px, 2.6vw, 39px); line-height: 1.1; font-weight: 800; letter-spacing: -.035em; color: #f5ce80; white-space: nowrap; }
 .format-price__rates dd span { font-size: .58em; font-weight: 600; letter-spacing: 0; }
-:is(#formats, .price-dialog) .format-price__unit { margin: 20px 0 0; color: #e4edf8; font-size: 21px; font-weight: 500; line-height: 1.45; }
+:where(#formats, .price-dialog) .format-price__unit { margin: 20px 0 0; color: #e4edf8; font-size: 21px; font-weight: 500; line-height: 1.45; }
 @media (min-width: 781px) {
   #formats .format-benefits > .benefit > .holiday-list { min-height: 234px; }
 }
 @media (max-width: 1080px) and (min-width: 781px) {
-  :is(#formats, .price-dialog) .format-price { margin-inline: 16px; padding-inline: 10px; }
+  :where(#formats, .price-dialog) .format-price { margin-inline: 16px; padding-inline: 10px; }
   .format-price__rates dd { font-size: 24px; }
   #formats .format-benefits > .benefit > .holiday-list { min-height: 250px; }
 }
@@ -2328,7 +2326,19 @@ main > .section > .container {
   #early-program .holiday-card > .holiday-card-note { grid-row: 4; align-self: start; }
   #early-program .holiday-card::after { grid-row: 5; align-self: end; }
 }
-#family-activities .benefits { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+#family-activities .benefits { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+#family-activities .benefit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: auto;
+  min-height: 0;
+  text-align: center;
+}
+#family-activities .benefit > * { flex: none; width: 100%; min-width: 0; }
+#family-activities .benefit > h3 { margin: 0 0 12px; line-height: 1.25; }
+#family-activities .benefit > p { margin: 0; line-height: 1.5; }
 @media (max-width: 780px) {
   #family-activities .benefits { grid-template-columns: minmax(0, 1fr); }
 }
@@ -2356,7 +2366,7 @@ main > .section > .container {
   pointer-events: none;
 }
 #early-program .holiday-card::after { height: 72px; margin-top: auto; }
-#family-activities .benefit::after { height: 64px; }
+#family-activities .benefit::after { flex: none; height: 96px; margin: auto auto 0; }
 #family-activities .benefit:nth-child(1) { --popup-decor: url('assets/newscreens/decor/11a437fa-bb67-4eb8-b68a-5d01b2911eb3.png'); }
 #family-activities .benefit:nth-child(2) { --popup-decor: url('assets/newscreens/decor/63cc1638-80e1-4219-8f49-7a30c578f7ad.png'); }
 #family-activities .benefit:nth-child(3) { --popup-decor: url('assets/newscreens/decor/9758ea5e-133f-410b-96c8-b3006dfb8568.png'); }
@@ -2408,9 +2418,9 @@ main > .section > .container {
 .winter-card-photo { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
 .winter-card-copy { padding: var(--card-padding); }
 .program-card-actions { margin: 28px clamp(20px, 2.5vw, 40px) 0; }
-.program-card-actions .holiday-button { width: min(430px, 100%); min-height: 48px; padding: 12px 20px; margin-inline: auto; font-size: clamp(12px, 1.1vw, 16px); }
+.program-card-actions .holiday-button { width: min(430px, 100%); min-height: 56px; padding: 14px 20px; margin-inline: auto; font-size: 16px; white-space: normal; text-wrap: balance; }
 .family-card-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 28px clamp(20px, 2.5vw, 40px) 0; }
-.holiday-button { appearance: none; min-width: 0; min-height: 64px; padding: 14px 18px; border: 2px solid #EAB45C; border-radius: 999px; background: #00133A; color: #fff; font-family: inherit; font-size: clamp(12px, 1vw, 16px); font-weight: 800; line-height: 1.35; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }
+.holiday-button { appearance: none; min-width: 0; min-height: 64px; padding: 14px 18px; border: 2px solid #EAB45C; border-radius: var(--button-radius); background: #00133A; color: #fff; font-family: inherit; font-size: clamp(12px, 1vw, 16px); font-weight: 800; line-height: 1.35; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }
 .holiday-button:hover { background: var(--gold); color: #00133A; }
 .holiday-button:focus-visible { outline: 3px solid var(--cheber); outline-offset: 4px; }
 .menu-dialog { width: min(700px, calc(100% - 32px)); }
@@ -2425,7 +2435,7 @@ main > .section > .container {
   padding: 12px 24px;
   border: 2px solid #EAB45C;
   box-shadow: inset 0 0 0 1px rgba(255, 215, 137, .2);
-  border-radius: 999px;
+  border-radius: var(--button-radius);
   background: #00133A;
   color: #fff;
   font-family: inherit;
@@ -2441,7 +2451,7 @@ main > .section > .container {
 #formats .format-details:focus-visible { outline: 3px solid var(--cheber); outline-offset: 4px; }
 .stay-dialog { width: min(1400px, calc(100% - 32px)); max-height: calc(100dvh - 32px); padding: 0; border: 1px solid rgba(244,251,255,.9); border-radius: 28px; color: var(--ink); background: #00133A url('assets/web/background.jpg') center top / cover; overflow: auto; }
 .stay-dialog::backdrop { background: rgba(0,9,31,.78); backdrop-filter: blur(6px); }
-.stay-dialog__close { position: sticky; top: 12px; z-index: 30; display: block; margin: 12px 12px -56px auto; width: 44px; height: 44px; border: 1px solid var(--gold); border-radius: 50%; background: #00133A; color: #fff; font-size: 30px; cursor: pointer; }
+.stay-dialog__close { position: sticky; top: 12px; z-index: 30; display: block; margin: 12px 12px -56px auto; width: 44px; height: 44px; border: 1px solid var(--gold); border-radius: var(--button-radius); background: #00133A; color: #fff; font-size: 30px; cursor: pointer; }
 .stay-dialog__close:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 .stay-dialog > .section { padding: 0; }
 .stay-dialog > .section > .container { width: 100%; padding: 64px var(--panel-padding) var(--panel-padding); border: 0; border-radius: 0; }
@@ -2726,13 +2736,13 @@ section[id], footer[id] { scroll-margin-top: 96px; }
 
 /* Larger decorative glints with cropped transparent margins. */
 #early-program .holiday-card::after,
-#family-activities .benefit::after { height: 112px; background-size: auto 210px; }
+#family-activities .benefit::after { height: 96px; background-size: contain; }
 #family-activities .benefit:nth-child(3) {
   --popup-decor: url('assets/newscreens/decor/11a437fa-bb67-4eb8-b68a-5d01b2911eb3.png');
 }
 #family-activities .benefit:nth-child(3)::after {
   width: min(100%, 240px);
-  height: 160px;
+  height: 96px;
   background-size: contain;
 }
 #adult-dialog .holiday-timeline::after,
@@ -2812,7 +2822,7 @@ section[id], footer[id] { scroll-margin-top: 96px; }
   padding: 0;
   margin: 0;
   font-family: Arial, sans-serif;
-  font-size: clamp(38px, 5.2vw, 84px);
+  font-size: clamp(36px, 4.9vw, 80px);
   font-weight: 900;
   letter-spacing: -.045em;
   line-height: .98;
@@ -2839,7 +2849,7 @@ section[id], footer[id] { scroll-margin-top: 96px; }
   padding: 14px 20px;
   margin: 0;
   border: 2px solid #ffe3a2;
-  border-radius: 20px;
+  border-radius: var(--button-radius);
   background: linear-gradient(#fbd07e, #e7ac4e);
   color: #100e09;
   font-family: Arial, sans-serif;
@@ -2861,16 +2871,30 @@ section[id], footer[id] { scroll-margin-top: 96px; }
 @media (max-width: 780px) {
   .header .container { width: calc(100% - 32px); }
   .header .header-inner { height: auto; min-height: 88px; padding-block: 12px; }
-  .hero--photo { width: calc(100% - 28px); aspect-ratio: auto; min-height: 760px; align-items: flex-start; border-radius: 26px; border-width: 1px; margin-bottom: 24px; }
-  .hero--photo .hero__photo { object-position: 76% bottom; }
-  .hero--photo::before { background: linear-gradient(180deg, #00132e 0%, rgba(0, 19, 46, .94) 34%, rgba(0, 19, 46, .18) 64%, transparent); }
-  .hero--photo .hero__grid { padding: 32px 24px 360px; }
+  .hero--photo { width: calc(100% - 28px); aspect-ratio: auto; min-height: 0; flex-direction: column; align-items: stretch; border-radius: 26px; border-width: 1px; margin-bottom: 24px; background: #00132e !important; }
+  .hero--photo .hero__photo {
+    position: relative;
+    inset: auto;
+    order: 2;
+    z-index: 0;
+    display: block;
+    flex: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1.15;
+    object-fit: cover;
+    object-position: right center;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 24px);
+    mask-image: linear-gradient(to bottom, transparent, #000 24px);
+  }
+  .hero--photo::before { content: none; }
+  .hero--photo .hero__grid { order: 1; flex: none; padding: 32px 24px 16px; }
   .hero--photo .hero__copy { width: 100%; }
-  .hero--photo h1 { font-size: clamp(30px, 7.9vw, 60px); }
+  .hero--photo h1 { font-size: clamp(26px, 7.3vw, 56px); }
   .hero--photo h1 span:nth-child(n+2) { display: inline; font-size: 1.2em; }
   .hero--photo h1 span:last-child::before { content: ' '; }
   .hero--photo .hero__description { margin: 18px 0 24px; font-size: clamp(18px, 3.6vw, 26px); }
-  .hero--photo .hero__cta { min-height: 56px; border-radius: 16px; }
+  .hero--photo .hero__cta { min-height: 56px; border-radius: var(--button-radius); }
 }
 
 /* Match the shared frosted panel rim. */
@@ -2892,4 +2916,231 @@ section[id], footer[id] { scroll-margin-top: 96px; }
   -webkit-text-fill-color: transparent;
   color: #dcefff;
   text-shadow: none;
+}
+
+/* Consistent mobile layout for cards, actions and dialogs. */
+@media (max-width: 780px) {
+  :root {
+    --text-button: 16px;
+    --text-benefit-title: 22px;
+    --text-benefit-body: 16px;
+    --text-lead: 17px;
+    --panel-padding: 16px;
+    --card-padding: 20px;
+    --card-gap: 20px;
+    --action-gap: 24px;
+  }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  .section-head h2 { overflow-wrap: anywhere; }
+  .offers .section-head h2 { font-size: clamp(26px, 7vw, 38px); line-height: 1.15; }
+  main > .section > .container { width: calc(100% - 28px); }
+  main > .hero--photo.section { padding-block: 0; }
+  .hero--photo .hero__grid { width: 100%; padding: 28px 24px 12px; }
+  .hero--photo .hero__cta { display: flex; width: 100% !important; margin-inline: auto; font-size: 18px; }
+  .hero--photo .hero__description { font-size: clamp(18px, 4.5vw, 24px); }
+  .holiday-grid, .holiday-grid--two, .holiday-grid--four { grid-template-columns: minmax(0, 1fr); }
+  .holiday-grid > *, .holiday-actions > *, .program-card-actions, .format-card-actions { min-width: 0; }
+  #formats .benefit, #programs .benefit { min-height: 0; padding-bottom: 24px; }
+  #formats .benefit > h3, #programs .benefit > h3 { line-height: 1.25; }
+  #formats .format-photo, #programs .program-photo { margin-bottom: 24px; }
+  #formats .format-card-actions {
+    align-self: stretch;
+    width: 100%;
+    grid-template-rows: none;
+    grid-auto-rows: auto;
+    justify-items: stretch;
+    gap: 12px;
+    padding: 0 20px;
+    margin: 0;
+  }
+  #formats .format-card-actions .btn,
+  #programs .program-card-actions .btn,
+  .holiday-actions .btn,
+  .stay-dialog .holiday-actions .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    min-height: 56px;
+    height: auto;
+    margin-inline: auto;
+    padding: 14px 18px;
+    font-size: 16px;
+    line-height: 1.4;
+    letter-spacing: .015em;
+    white-space: normal;
+    text-align: center;
+    overflow-wrap: anywhere;
+    text-decoration: none;
+    border-radius: var(--button-radius);
+  }
+  #formats .format-card-actions .btn { margin: 0; }
+  #formats .format-benefits > .benefit:nth-child(2) .format-card-actions::after { content: none; }
+  #programs .program-card-actions { width: auto; margin: 0 20px; padding-top: 24px; }
+  .holiday-actions { flex-direction: column; align-items: stretch; gap: 12px; }
+  #formats .container .holiday-actions .holiday-button[data-open-early],
+  #formats .container .holiday-actions .holiday-button[data-open-included] {
+    width: 100%;
+    height: auto;
+    min-height: 64px;
+    padding: 14px 16px;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  #formats [data-open-early] small { font-size: 13px; white-space: normal; }
+  main > .between-sections-actions { width: calc(100% - 28px); margin-inline: auto; padding: 12px 0; }
+  main > .final-booking .holiday-button { min-height: 64px; padding: 16px 20px; font-size: 17px; }
+  #family-activities .benefit { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 24px 20px; }
+  #family-activities .benefit__icon { flex: none; height: 84px; margin: 0 0 16px; }
+  #family-activities .benefit__icon img { width: 84px; height: 84px; }
+  #family-activities .benefit h3 { margin: 0 0 12px; }
+  #family-activities .benefit p { line-height: 1.5; }
+  .benefit:hover { transform: none; }
+  #winter .winter-card-copy { padding: 20px; }
+  .footer-contacts { gap: 12px; padding: 32px 20px; }
+  .footer-contacts__phone { display: flex; justify-content: center; align-items: center; width: 100%; min-height: 44px; font-size: 20px; }
+  .stay-dialog, .stay-dialog.price-dialog { width: calc(100% - 24px); max-width: 600px; max-height: calc(100dvh - 24px); border-radius: 24px; }
+  .stay-dialog > .section > .container { width: 100%; padding: 64px 16px 24px; }
+  .stay-dialog .section-head h2 { font-size: clamp(24px, 6.5vw, 32px); line-height: 1.2; overflow-wrap: anywhere; }
+  .stay-dialog .section-head { margin-bottom: 24px; }
+  .stay-dialog > .section > .container > .holiday-timeline { padding: 16px; }
+  .stay-dialog .holiday-timeline li,
+  .stay-dialog .holiday-card .holiday-timeline li { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .stay-dialog .holiday-timeline h4, .stay-dialog .holiday-timeline time { font-size: 18px; }
+  .stay-dialog .holiday-timeline p { font-size: 16px; }
+  .stay-dialog .holiday-card { min-width: 0; }
+  #stay-program .holiday-card:first-child::after { content: none; }
+  .price-included-line { white-space: normal; }
+  .price-dialog .format-price__rates { gap: 16px; }
+  .price-dialog .format-price__rates > div { min-width: 0; }
+  .price-dialog .format-price__rates dt { font-size: 16px; }
+  .price-dialog .format-price__rates dd { font-size: clamp(28px, 8vw, 38px); }
+  .price-dialog .format-price__unit { font-size: 17px; }
+  .form-panel input { min-width: 0; font-size: 16px; }
+}
+@media (max-width: 780px) {
+  #programs .program-card-actions { align-self: stretch; display: flex; width: calc(100% - 40px); }
+}
+@media (max-width: 780px) {
+  #included .holiday-table-wrap::before {
+    content: 'Листайте таблицу влево и вправо →';
+    display: block;
+    position: sticky;
+    left: 0;
+    width: 100%;
+    padding: 12px;
+    color: #ffe0a0;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: center;
+    background: #102a50;
+  }
+}
+@media (max-width: 430px) {
+  .price-dialog .format-price__rates { grid-template-columns: minmax(0, 1fr); }
+  .price-dialog .format-price__rates > div + div { border-left: 0; border-top: 1px solid rgba(234, 180, 92, .3); padding-top: 16px; }
+}
+
+/* Give card actions an explicit track width at every viewport size. */
+#formats .format-card-actions {
+  align-self: stretch;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: none;
+  grid-auto-rows: auto;
+  justify-items: stretch;
+  padding-inline: 20px;
+}
+#formats .format-card-actions .price-button,
+#formats .format-card-actions .format-details {
+  justify-self: stretch;
+  width: 100%;
+  max-width: 100%;
+  min-height: 56px;
+  height: auto;
+  margin: 0;
+  padding: 14px 18px;
+  white-space: normal;
+  font-size: 16px;
+  line-height: 1.4;
+}
+#formats .format-benefits > .benefit:nth-child(2) .format-card-actions::after {
+  position: static;
+  height: 96px;
+}
+
+#formats .format-card-actions a.format-details {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+  height: auto;
+}
+#formats .format-card-actions .format-details__label {
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+
+@media (max-width: 780px) {
+  #family-activities .benefit::after {
+    width: min(100%, 240px);
+    height: 80px;
+    margin: 16px auto 0;
+    background-size: contain;
+  }
+}
+/* Alignment shared by the final content and all mobile screens. */
+#formats .benefit,
+#programs .benefit,
+#winter .winter-card-copy { text-align: center; }
+#winter .winter-card-copy .holiday-list { list-style: none; padding: 0; text-align: center; }
+#formats .format-card-actions .btn,
+#programs .program-card-actions .btn,
+.holiday-actions .btn { align-items: center; justify-content: center; text-align: center; }
+#programs .program-card-actions { display: flex; justify-content: center; }
+.holiday-actions .holiday-button { font-size: 16px; white-space: normal; }
+#family-activities .benefit__icon { justify-content: center; }
+@media (max-width: 780px) {
+  .hero--photo .hero__copy,
+  .hero--photo .hero__description { text-align: center; }
+  .hero--photo h1 { text-align: center; }
+  .hero--photo h1 > span { width: auto; }
+  .hero--photo .hero__copy { margin-inline: auto; }
+  .hero--photo .hero__description { margin-inline: auto; }
+  .hero--photo .hero__cta { margin-inline: auto; }
+  .offers > .container { margin-inline: auto; }
+  .section-head, .section-head h2, .section-head .lead { text-align: center; }
+  .holiday-card, .holiday-card h3, .holiday-card .holiday-card__subtitle { text-align: center; }
+  .holiday-card .holiday-list { padding: 0; list-style: none; text-align: center; }
+  .stay-dialog .holiday-card, .stay-dialog .holiday-timeline { text-align: center; }
+  .stay-dialog .holiday-timeline li { justify-items: center; }
+  .stay-dialog .holiday-timeline li > div { width: 100%; min-width: 0; }
+  .stay-dialog .early-card-description, .stay-dialog .holiday-card-note { text-align: center; }
+  .stay-dialog .holiday-list { padding: 0; list-style: none; text-align: center; }
+  .stay-dialog .holiday-card__subtitle { text-align: center; }
+  .stay-dialog .price-room-note { text-align: center; }
+  .stay-dialog .section-head .lead { text-align: center; }
+  .stay-dialog.price-dialog .format-price { margin-inline: 0; width: 100%; }
+  .stay-dialog .holiday-table th, .stay-dialog .holiday-table td { text-align: center; }
+  #family-activities .benefit::after { margin-inline: auto; }
+  #programs .program-card-actions .holiday-button { text-wrap: balance; }
+  main > .between-sections-actions { align-items: stretch; }
+  .footer-contacts { flex-direction: column; }
+  .footer-contacts__phones { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+}
+
+/* Opaque photo cards do not need a backdrop compositing layer. */
+#formats .benefit,
+#programs .benefit {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+@media (min-width: 781px) {
+  #formats .format-card-actions { grid-template-rows: 56px 76px; gap: 16px; }
+  #formats .format-benefits > .benefit:nth-child(2) .format-card-actions::after { height: 76px; align-self: center; }
 }
